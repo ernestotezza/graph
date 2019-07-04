@@ -18,6 +18,8 @@ class Graph:
             print("Primeiro vertice invalido!")
         elif v2 not in self.vertices:
             print("Segundo vertice invalido!")
+        elif peso <= 0:
+            print("Peso invalido")
         else:
             adjacencia = [v1,v2,peso]
             self.adjs.append(adjacencia)
@@ -32,7 +34,19 @@ class Graph:
                 return True
         print('Não é adjacente')
         return False
-    
+
+    def numVizinhos(self, v):
+        vetVizinhos = []
+        for adj in self.adjs:
+            if v == adj[0]:
+                if adj[1] not in vetVizinhos:
+                    vetVizinhos.append(adj[1])
+            elif v == adj[1]:
+                if adj[0] not in vetVizinhos:
+                    vetVizinhos.append(adj[0])
+        #print(vetVizinhos)
+        return len(vetVizinhos)
+            
 
 #testes
 vert = [1, 2, 3, 4]
@@ -41,6 +55,8 @@ g1 = Graph(vert, a)
 g1.criaNo(8)
 g1.criaNo(3)
 print(g1.vertices)
-g1.criaAdj(1,2,10)
+g1.criaAdj(1,8,10)
 print(g1.adjs)
 g1.ehAdjacente(1,2)
+print("Numero de vizinhos: " + str(g1.numVizinhos(2)))
+#print(g1.numVizinhos(2))
